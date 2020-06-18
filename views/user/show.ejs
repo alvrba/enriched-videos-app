@@ -1,0 +1,87 @@
+
+<div class="row">
+  <div class="col s12 z-depth-1 indigo lighten-4">
+    <div  style="display: flex;align-items: center;justify-content: center;">
+      <div style="flex-grow: 1; margin-right: 15px">
+        <h3><b><%=user.username%></b></h3>
+      </div>
+      <% if (session.user && session.user.id === user.id) { %>
+      <div>
+        <a class="waves-effect waves-light btn indigo" href="/users/<%=user.id%>/edit"><i class="material-icons left">edit</i>EDITAR PERFIL</a>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+
+  <div class="row" style="margin-top: 25px;">
+    <div class="col s0 xl2"></div>
+    <div class="col s12 xl8">
+      <h3>Todos los videos de <b><%=user.username%></b></h3>
+    </div>
+    <div class="col s0 xl2"></div>
+  </div>
+
+  <div class="row" style="">
+    <div class="col s0 xl2"></div>
+    <div class="col s12 xl8">
+      <form method="get" action="/videos"
+      <div  style="display: flex;align-items: center;justify-content: center;">
+        <div style="flex-grow: 1; margin-right: 15px">
+          <input type="text" name="search" value="<%= locals.search || '' %>" placeholder="buscar video" autocomplete="off" />
+        </div>
+        <div>
+          <button class="btn waves-effect waves-light indigo" type="submit" name="action">BUSCAR</button>
+        </div>
+      </div>
+    </form>
+    </div>
+    <div class="col s0 xl2"></div>
+  </div>
+
+  <div class="row" style="margin-top: 25px;">
+    <div class="col s0 xl2"></div>
+    <div class="col s12 xl8">
+      <% for (var i in user.content) {%>
+        <a style="text-decoration:none; color: black" href="/videos/<%=user.content[i].id%>">
+        <div class="col s12 m6 xl4">
+          <div class="card sticky-action">
+            <div class="card-image">
+              <img src="https://i.ytimg.com/vi/<%=user.content[i].url%>/hqdefault.jpg">
+              <span class="card-title"></span>
+
+              <% if (session.user && session.user.id === user.id) { %>
+                <a class="btn-floating halfway-fab waves-effect waves-light indigo large" href="/videos/<%=user.content[i].id%>/edit"><i class="material-icons">edit</i></a>
+              <% } %>
+            </div>
+            <div class="card-content">
+              <h5 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><b><%=user.content[i].title%></b></h5>
+              <h6 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><%=user.username%></h6>
+              <p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><%=user.content[i].description%></p>
+            </div>
+
+            <% if (session.user && session.user.id === user.id) { %>
+            <div class="card-action">
+              <a class="waves-effect waves-light btn indigo" href="/videos/<%= user.content[i].id %>?_method=DELETE" onClick="return confirm('¿Eliminar: <%= user.content[i].title %>?');"><i class="material-icons left">delete</i>ELIMINAR</a>
+            </div>
+            <% } %>
+            </div>
+          </div>
+          </a>
+
+
+      <%}%>
+    </div>
+    <div class="col s0 xl2"></div>
+  </div>
+
+  <div class="row" style="margin-top: 25px;">
+    <div class="col s0 xl2"></div>
+    <div class="col s12 xl8">
+      <% if (locals.paginate_control) { %>
+  <%- paginate_control -%>
+  <% } %>
+    </div>
+    <div class="col s0 xl2"></div>
+  </div>

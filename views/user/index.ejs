@@ -1,0 +1,10 @@
+<h1>All users</h1>
+<table>
+  <% for (var i in users) {%>
+    <tr>
+      <td><%=users[i].name%></td>
+      <td><%=users[i].id%></td>
+      <td><a href="/users/<%=users[i].id%>" class="button">Más info</a></td>
+    </tr>
+  <%}%>
+</table>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/materialize/materialize.css"  media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name='viewport' content='width=device-width, initial-sacale=1.0'>
+    <link rel='stylesheet'
+          type='text/css'
+          media='only screen and (min-width: 800px) and (min-device-width: 600px)'
+          href='/stylesheets/wide.css'/>
+    <link rel='stylesheet'
+          type='text/css'
+          media='only screen and (max-width: 480px)'
+          href='/stylesheets/smartphone.css'/>
+  </head>
+
+  <body>
+      <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+
+      main {
+        flex: 1 0 auto;
+      }
+
+      ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #3f51b5;
+        opacity: 1; /* Firefox */
+      }
+      </style>
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.dropdown-trigger');
+      var instances = M.Dropdown.init(elems);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems);
+    });
+    </script>
+
+
+
+    <ul id="dropdown1" class="dropdown-content">
+      <% if (session.user) {%>
+        <li><a href="/users/<%=session.user.id%>" class="indigo-text">Ver perfil</a></li>
+        <li><a href="/users/<%=session.user.id%>/edit" class="indigo-text">Editar perfil</a></li>
+        <li><a href="/session?_method=DELETE" class="indigo-text">Cerrar sesión</a></li>
+      <% } %>
+    </ul>
+
+
+    <nav class="white">
+      <div class="nav-wrapper indigo lighten-5">
+        <a href="/" class="brand-logo indigo-text"></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="indigo-text material-icons prefix">menu</i></a>
+        <ul class="hide-on-med-and-down right">
+          <li>
+            <div class="center row">
+              <div class="col s12 " >
+                <div class="row" id="topbarsearch">
+                  <div class="input-field col s6 s12 indigo-text">
+                    <form method="get" action="/videos">
+                        <i class="indigo-text material-icons prefix">search</i>
+                        <input type="text" placeholder="buscar" name="search" id="autocomplete-input" class="autocomplete indigo-text" value="<%= locals.search || '' %>" placeholder="question to search" autocomplete="off" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li><a href="/videos" class="indigo-text">Videos</a></li>
+          <li><a href="/videos/new" class="indigo-text">Nuevo video</a></li>
+          <% if (session.user) {%>
+            <li><a class="dropdown-trigger indigo-text" href="#!" data-target="dropdown1"><b><%=session.user.username%></b><i class="material-icons right">arrow_drop_down</i></a></li>
+          <% } else {%>
+            <li><a href="/session" class="indigo-text">Iniciar sesión</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
+
+
+    <ul class="sidenav" id="mobile-demo">
+      <li>
+        <div class="center row">
+          <div class="col s12 " >
+            <div class="row" id="topbarsearch">
+              <div class="input-field col s6 s12 indigo-text">
+                <form method="get" action="/videos">
+                    <i class="indigo-text material-icons prefix">search</i>
+                    <input type="text" placeholder="buscar" name="search" id="autocomplete-input" class="autocomplete indigo-text" value="<%= locals.search || '' %>" placeholder="question to search" autocomplete="off" />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li><a href="/videos" class="indigo-text">Videos</a></li>
+      <li><a href="/videos/new" class="indigo-text">Nuevo video</a></li>
+      <% if (session.user) {%>
+      <li><a href="/users/<%=session.user.id%>/edit" class="indigo-text"><%=session.user.username%></a></li>
+      <li><a href="/session?_method=DELETE" class="indigo-text">Cerrar sesión</a></li>
+      <% } else {%>
+        <li><a href="/session" class="indigo-text">Iniciar sesión</a></li>
+      <% } %>
+    </ul>
+
+
+
+    <main>
+      <section>
+    		<div>
+    			<%- body%>
+    		</div>
+    	</section>
+    </main>
+
+    <footer class="page-footer indigo" style="margin-top: 40px">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Acerca de la plataforma</h5>
+            <p class="grey-text text-lighten-4">Esta plataforma tiene como objetivo proporcionar una herramienta de aprendizaje basada en videos enriquecidos con contenido interactivo.</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Menú</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="/videos">Todos los videos</a></li>
+              <li><a class="grey-text text-lighten-3" href="/videos/new">Crear un nuevo video</a></li>
+              <% if (session.user) { %>
+                <li><a class="grey-text text-lighten-3" href="/users/<%=session.user.id%>">Ver mi perfil</a></li>
+                <li><a class="grey-text text-lighten-3" href="/users/<%=session.user.id%>/edit">Editar mi perfil</a></li>
+              <% } else { %>
+                <li><a class="grey-text text-lighten-3" href="/session">Iniciar sesión</a></li>
+                <li><a class="grey-text text-lighten-3" href="/users/new">Registrarse</a></li>
+              <% } %>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        © 2020
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript" src="/javascripts/materialize/materialize.js"></script>
+  </body>
+
+</html>

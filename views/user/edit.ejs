@@ -1,0 +1,52 @@
+<div class="container">
+<div class="row card-panel indigo lighten-5" style="margin-top:50px">
+  <form class="col s12" method="post" action="/users/<%= user.id %>?_method=PUT">
+
+    <h2>Editar datos perfil</h2>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="username" type="text" name="username" value="<%=user.username%>" class="validate" required>
+        <label for="username">Username</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="name" type="text" name="name" value="<%=user.name%>" class="validate" required>
+        <label for="name">Nombre</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="lastname" type="text" name="lastname" value="<%=user.lastname%>" class="validate" required>
+        <label for="lastname">Apellidos</label>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" type="email" name="email" value="<%=user.email%>" class="validate" required>
+        <label for="email">Email</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="password" type="password" name="password" class="validate" required>
+        <label for="password">Contraseña</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <div style="display: flex; justify-content: flex-end;">
+          <div>
+        <button class="btn waves-effect waves-light indigo" type="submit" name="action">CONFIRMAR CAMBIOS</button>
+        </div>
+        </div>
+      </div>
+      </form>
+    </div>
+
+</div>

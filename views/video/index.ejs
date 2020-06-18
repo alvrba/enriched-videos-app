@@ -1,0 +1,61 @@
+
+    <div class="row" style="margin-top: 25px;">
+      <div class="col s0 xl2"></div>
+      <div class="col s12 xl8">
+        <h2>Todos los videos</h2>
+      </div>
+      <div class="col s0 xl2"></div>
+    </div>
+
+    <div class="row" style="">
+      <div class="col s0 xl2"></div>
+      <div class="col s12 xl8">
+        <form method="get" action="/videos"
+        <div  style="display: flex;align-items: center;justify-content: center;">
+          <div style="flex-grow: 1; margin-right: 15px">
+            <input type="text" name="search" value="<%= locals.search || '' %>" placeholder="buscar video" autocomplete="off" />
+          </div>
+          <div>
+            <button class="btn waves-effect waves-light indigo" type="submit" name="action">BUSCAR</button>
+          </div>
+        </div>
+      </form>
+      </div>
+      <div class="col s0 xl2"></div>
+    </div>
+
+    <div class="row" style="margin-top: 25px;">
+      <div class="col s0 xl2"></div>
+      <div class="col s12 xl8">
+        <% for (var i in videos) {%>
+          <a style="text-decoration:none; color: black" href="/videos/<%=videos[i].id%>">
+          <div class="col s12 m6 xl4">
+            <div class="card">
+              <div class="card-image">
+                <img src="https://i.ytimg.com/vi/<%=videos[i].url%>/hqdefault.jpg">
+                <span class="card-title"></span>
+              </div>
+              <div class="card-content">
+                <h5 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;"><b><%=videos[i].title%></b></h5>
+                <h6 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><%=videos[i].creator.username%></h6>
+                <p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;"><%=videos[i].description%></p>
+                </div>
+              </div>
+            </div>
+            </a>
+
+
+        <%}%>
+      </div>
+      <div class="col s0 xl2"></div>
+    </div>
+
+    <div class="row" style="margin-top: 25px;">
+      <div class="col s0 xl2"></div>
+      <div class="col s12 xl8">
+        <% if (locals.paginate_control) { %>
+          <%- paginate_control -%>
+        <% } %>
+        </div>
+      <div class="col s0 xl2"></div>
+    </div>

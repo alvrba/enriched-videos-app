@@ -1,0 +1,122 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/materialize/materializeApp.css"  media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel='stylesheet' type='text/css' href='/stylesheets/createvideo/main.16219bc2.chunk.css'/>
+    <script src="/javascripts/createvideo/2.d95f23c3.chunk.js"></script>
+    <script src="/javascripts/createvideo/main.a1fa52b1.chunk.js"></script>
+    <script src="/javascripts/createvideo/runtime-main.5caf5bb4.js"></script>
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta name='viewport' content='width=device-width, initial-sacale=1.0'>
+    <link rel='stylesheet'
+          type='text/css'
+          media='only screen and (min-width: 800px) and (min-device-width: 600px)'
+          href='/stylesheets/wide.css'/>
+    <link rel='stylesheet'
+          type='text/css'
+          media='only screen and (max-width: 480px)'
+          href='/stylesheets/smartphone.css'/>
+  </head>
+
+  <body>
+      <style>
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+
+      main {
+        flex: 1 0 auto;
+      }
+
+      ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #3f51b5;
+        opacity: 1; /* Firefox */
+      }
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.dropdown-trigger');
+      var instances = M.Dropdown.init(elems);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems);
+    });
+    </script>
+
+
+<div class="app">
+    <ul id="dropdown1" class="dropdown-content">
+      <% if (session.user) {%>
+        <li><a href="/users/<%=session.user.id%>" class="indigo-text">Ver perfil</a></li>
+        <li><a href="/users/<%=session.user.id%>/edit" class="indigo-text">Editar perfil</a></li>
+        <li><a href="/session?_method=DELETE" class="indigo-text">Cerrar sesión</a></li>
+      <% } %>
+    </ul>
+
+
+    <nav class="white">
+      <div class="nav-wrapper indigo lighten-5">
+        <a href="/" class="brand-logo indigo-text"></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="indigo-text material-icons prefix">menu</i></a>
+        <ul class="hide-on-med-and-down right">
+          <li><a href="/videos" class="indigo-text">Videos</a></li>
+          <li><a href="/videos/new" class="indigo-text">Nuevo video</a></li>
+          <% if (session.user) {%>
+            <li><a class="dropdown-trigger indigo-text" href="#!" data-target="dropdown1"><b><%=session.user.username%></b><i class="material-icons right">arrow_drop_down</i></a></li>
+          <% } else {%>
+            <li><a href="/session" class="indigo-text">Iniciar sesión</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </nav>
+
+
+    <ul class="sidenav" id="mobile-demo">
+      <li>
+        <div class="center row">
+          <div class="col s12 " >
+            <div class="row" id="topbarsearch">
+              <div class="input-field col s6 s12 indigo-text">
+                <form method="get" action="/videos">
+                    <i class="indigo-text material-icons prefix">search</i>
+                    <input type="text" placeholder="buscar" name="search" id="autocomplete-input" class="autocomplete indigo-text" value="<%= locals.search || '' %>" placeholder="question to search" autocomplete="off" />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li><a href="/videos" class="indigo-text">Videos</a></li>
+      <li><a href="/videos/new" class="indigo-text">Nuevo video</a></li>
+      <% if (session.user) {%>
+      <li><a href="/users/<%=session.user.id%>/edit" class="indigo-text"><%=session.user.username%></a></li>
+      <li><a href="/session?_method=DELETE" class="indigo-text">Cerrar sesión</a></li>
+      <% } else {%>
+        <li><a href="/session" class="indigo-text">Iniciar sesión</a></li>
+      <% } %>
+    </ul>
+</div>
+
+
+    <main>
+      <section>
+    		<div>
+    			<%- body%>
+    		</div>
+    	</section>
+    </main>
+
+
+    <script type="text/javascript" src="/javascripts/materialize/materialize.js"></script>
+  </body>
+
+</html>
